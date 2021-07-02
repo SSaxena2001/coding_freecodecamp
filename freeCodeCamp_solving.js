@@ -1,0 +1,657 @@
+function sum(arr, n) {
+  if (n <= 0) {
+    return 0;
+  } else {
+    return sum(arr, n - 1) + arr[n - 1];
+  }
+}
+console.log(sum([2, 3, 4], 1));
+console.log(sum([2, 3, 4, 5], 3));
+
+
+
+var contacts = [{
+    "firstName": "Akira",
+    "lastName": "Laine",
+    "number": "0543236543",
+    "likes": ["Pizza", "Coding", "Brownie Points"]
+  },
+  {
+    "firstName": "Harry",
+    "lastName": "Potter",
+    "number": "0994372684",
+    "likes": ["Hogwarts", "Magic", "Hagrid"]
+  },
+  {
+    "firstName": "Sherlock",
+    "lastName": "Holmes",
+    "number": "0487345643",
+    "likes": ["Intriguing Cases", "Violin"]
+  },
+  {
+    "firstName": "Kristian",
+    "lastName": "Vos",
+    "number": "unknown",
+    "likes": ["JavaScript", "Gaming", "Foxes"]
+  }
+];
+
+function lookUpProfile(name, prop) {
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i].firstName === name) {
+      if (prop in contacts[i]) {
+        return contacts[i][prop];
+      } else {
+        return "No such property";
+      }
+    }
+  }
+  return "No such contact";
+}
+
+const s = (...args) => {
+  return args.reduce((sum, value) => sum = sum + value);
+}
+console.log(s(6, 7, 8));
+
+function makeList(arr) {
+  // Only change code below this line
+  const failureItems = [];
+  arr.map(a => {
+    failureItems.push(`<li class="text-warning">${a}</li>`)
+  })
+  // Only change code above this line
+
+  return failureItems;
+}
+const result = {
+  success: ["max-length", "no-amd", "prefer-arrow-functions"],
+  failure: ["no-var", "var-on-top", "linebreak"],
+  skipped: ["no-extra-semi", "no-dup-keys"]
+};
+
+console.log(makeList(result.failure));
+
+let users = {
+  Alan: {
+    age: 27,
+    online: true
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: true
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function isEveryoneHere(userObj) {
+  // Only change code below this line
+  if (
+    userObj.hasOwnProperty("Alan") &&
+    userObj.hasOwnProperty("Jeff") &&
+    userObj.hasOwnProperty("Sarah") &&
+    userObj.hasOwnProperty("Ryan")
+  ) {
+    return true;
+  }
+  return false;
+}
+// Only change code above this line
+
+let users1 = {
+  Alan: {},
+  Jeff: {}
+};
+console.log(isEveryoneHere(users));
+
+function countOnline(usersObj) {
+  // Only change code below this line
+  let count = 0;
+  for (let user in usersObj) {
+    if (usersObj[user].online == true) {
+      count = count + 1;
+    }
+  }
+  return count;
+  // Only change code above this line
+}
+console.log(countOnline(users));
+console.log(countOnline({
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}));
+
+function findLongestWordLength(str) {
+  let longest = str.split(" ").map(s => s.length).sort((a, b) => a - b).reverse()
+  return longest[0];
+}
+
+console.log(findLongestWordLength("What if we try a super-long word such as otorhinolaryngology"));
+
+function confirmEnding(str, target) {
+  return str.slice(str.length - target.length) === target;
+}
+
+console.log(confirmEnding("Open sesame", "sage"));
+
+function repeatStringNumTimes(str, num) {
+  if (num < 0) {
+    return [];
+  } else {
+    let s = "";
+    for (let i = 0; i < num; i++) {
+      s = s + str;
+    }
+    return s;
+  }
+}
+
+console.log(repeatStringNumTimes("abc", 3));
+
+function truncateString(str, num) {
+  if(num<str.length){
+    return str.split("").filter((element,index) => index < num).join("")+"...";
+  }
+  else{
+    return str;
+  }
+}
+
+console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8));
+console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length + 2));
+
+function findElement(arr, func) {
+  let num = 0;
+  num=arr.filter(element=>func(element));
+  return num[0];
+}
+
+console.log(findElement([1, 2, 3, 4], num => num % 2 === 0));
+console.log(findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; }));
+
+function frankenSplice(arr1, arr2, n) {
+  let localArr = arr2.slice();
+  localArr.splice(n, 0, ...arr1);
+  localArr.splice()
+  return localArr;
+}
+
+frankenSplice([1, 2, 3], [4, 5], 1);
+
+function bouncer(arr) {
+  return arr.filter(Boolean);
+}
+
+console.log(bouncer([7, "ate", "", false, 9]));
+
+// The global variable
+var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
+
+// Change code below this line
+function add (bookList,bookName) {
+  let newBookList=[...bookList];
+  newBookList.push(bookName);
+  return newBookList;
+  
+  // Change code above this line
+}
+
+// Change code below this line
+function remove (bookList,bookName) {
+  var temp_list=[...bookList];
+  var book_index = temp_list.indexOf(bookName);
+  if (book_index >= 0) {
+
+    temp_list.splice(book_index, 1);
+    return temp_list;
+
+    // Change code above this line
+    }
+}
+
+var newBookList = add(bookList, 'A Brief History of Time');
+var newerBookList = remove(bookList, 'On The Electrodynamics of Moving Bodies');
+var newestBookList = remove(add(bookList, 'A Brief History of Time'), 'On The Electrodynamics of Moving Bodies');
+
+bookList
+newBookList
+newerBookList
+newestBookList
+
+
+// The global variable
+var watchList = [
+  {
+    "Title": "Inception",
+    "Year": "2010",
+    "Rated": "PG-13",
+    "Released": "16 Jul 2010",
+    "Runtime": "148 min",
+    "Genre": "Action, Adventure, Crime",
+    "Director": "Christopher Nolan",
+    "Writer": "Christopher Nolan",
+    "Actors": "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy",
+    "Plot": "A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.",
+    "Language": "English, Japanese, French",
+    "Country": "USA, UK",
+    "Awards": "Won 4 Oscars. Another 143 wins & 198 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+    "Metascore": "74",
+    "imdbRating": "8.8",
+    "imdbVotes": "1,446,708",
+    "imdbID": "tt1375666",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Interstellar",
+    "Year": "2014",
+    "Rated": "PG-13",
+    "Released": "07 Nov 2014",
+    "Runtime": "169 min",
+    "Genre": "Adventure, Drama, Sci-Fi",
+    "Director": "Christopher Nolan",
+    "Writer": "Jonathan Nolan, Christopher Nolan",
+    "Actors": "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
+    "Plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "Language": "English",
+    "Country": "USA, UK",
+    "Awards": "Won 1 Oscar. Another 39 wins & 132 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg",
+    "Metascore": "74",
+    "imdbRating": "8.6",
+    "imdbVotes": "910,366",
+    "imdbID": "tt0816692",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "The Dark Knight",
+    "Year": "2008",
+    "Rated": "PG-13",
+    "Released": "18 Jul 2008",
+    "Runtime": "152 min",
+    "Genre": "Action, Adventure, Crime",
+    "Director": "Christopher Nolan",
+    "Writer": "Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)",
+    "Actors": "Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine",
+    "Plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.",
+    "Language": "English, Mandarin",
+    "Country": "USA, UK",
+    "Awards": "Won 2 Oscars. Another 146 wins & 142 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+    "Metascore": "82",
+    "imdbRating": "9.0",
+    "imdbVotes": "1,652,832",
+    "imdbID": "tt0468569",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Batman Begins",
+    "Year": "2005",
+    "Rated": "PG-13",
+    "Released": "15 Jun 2005",
+    "Runtime": "140 min",
+    "Genre": "Action, Adventure",
+    "Director": "Christopher Nolan",
+    "Writer": "Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)",
+    "Actors": "Christian Bale, Michael Caine, Liam Neeson, Katie Holmes",
+    "Plot": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.",
+    "Language": "English, Urdu, Mandarin",
+    "Country": "USA, UK",
+    "Awards": "Nominated for 1 Oscar. Another 15 wins & 66 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg",
+    "Metascore": "70",
+    "imdbRating": "8.3",
+    "imdbVotes": "972,584",
+    "imdbID": "tt0372784",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Avatar",
+    "Year": "2009",
+    "Rated": "PG-13",
+    "Released": "18 Dec 2009",
+    "Runtime": "162 min",
+    "Genre": "Action, Adventure, Fantasy",
+    "Director": "James Cameron",
+    "Writer": "James Cameron",
+    "Actors": "Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang",
+    "Plot": "A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "Language": "English, Spanish",
+    "Country": "USA, UK",
+    "Awards": "Won 3 Oscars. Another 80 wins & 121 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg",
+    "Metascore": "83",
+    "imdbRating": "7.9",
+    "imdbVotes": "876,575",
+    "imdbID": "tt0499549",
+    "Type": "movie",
+    "Response": "True"
+  }
+];
+
+// Only change code below this line
+
+var ratings = [];
+ratings=watchList.map(movie=>{
+  return {title:movie.Title,rating:movie.imdbRating}
+});
+// watchList
+ratings
+// Only change code above this line
+
+console.log(JSON.stringify(ratings));
+
+
+
+// The global variable
+var s1 = [23, 65, 98, 5];
+
+Array.prototype.myFilter = function(callback) {
+  // Only change code below this line
+  var newArray = []
+  this.forEach(element=>{if(callback(element)){newArray.push(element)}});
+  newArray
+  // Only change code above this line
+  return newArray;
+};
+
+var new_s = s1.myFilter(function(item) {
+  return item % 2 === 1;
+});
+
+function getRating(watchList){
+  // Only change code below this line
+  var averageRating=
+  watchList
+  .filter(movie=>movie.Director==="Christopher Nolan")
+  .map(film=> Number(film.imdbRating))
+  .reduce((sum,rating)=>sum+rating,0)/
+  watchList.filter(film => film.Director === "Christopher Nolan").length;
+  // Only change code above this line
+  return averageRating;
+}
+console.log(getRating(watchList));
+
+function splitify(str) {
+  // Only change code below this line
+  const s= str.split(/\W/);
+  s
+  // Only change code above this line
+}
+splitify("Hello World,I-am code");
+
+
+function urlSlug(title) {
+  let result= title.toLowerCase().split(" ").filter(value => value!=='').join('-');
+  result
+}
+urlSlug(" Winter Is  Coming")
+
+function destroyer(arr) {
+  let args=[...arguments].slice(1);
+  return arr.filter(item=>!(args.includes(item))); 
+}
+
+console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
+
+
+
+function whatIsInAName(collection, source) {
+  // Only change code below this line
+  let keys = Object.keys(source);
+  return collection.filter((obj) =>{
+      return keys.every((key) =>{
+        return obj.hasOwnProperty(key) && obj[key] === source[key];
+      });
+    });
+  // Only change code above this line
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+
+function translatePigLatin(str) {
+  arr=str.split("");
+  var s=null;
+  if(['a','e','i','o','u'].includes(arr[0])){
+    s=str+"way";
+  } else {
+    s=arr.slice(1,arr.length).concat(arr[0]).concat(['a','y']).join("");
+  }
+  s
+  return s;
+}
+
+console.log(translatePigLatin("california"));
+console.log(translatePigLatin("algorithm"));
+
+function myReplace(str, before, after) {
+  if(before.match(/[A-Z]/)){
+    after=after.charAt(0).toUpperCase() + after.slice(1);
+    after
+  } else {
+    after=after.charAt(0).toLowerCase() + after.slice(1);
+  }
+  return str.replace(before,after);
+}
+
+console.log(
+  myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped"),
+  myReplace("He is Sleeping on the couch", "Sleeping", "sitting")
+);
+
+function pairElement(str) {
+  let stringArr=str.split("");
+  var newArray=[];
+  stringArr.map(value=>{
+    if(value==='A'){
+      newArray.push(["A","T"]);
+    } else if(value==='T'){
+      newArray.push(["T","A"]);
+    } else if(value==='C'){
+      newArray.push(["C","G"]);
+    } else{
+      newArray.push(["G","C"]);
+    }
+  });
+  newArray
+  return newArray;
+}
+
+pairElement("ATCGA");
+
+function fearNotLetter(str) {
+  for(var i=0; i<str.length;i++){
+    var code=str.charCodeAt(i);
+    if(code!==str.charCodeAt(0)+i){
+      return String.fromCharCode(code - 1);
+    }
+  }
+  return undefined;
+}
+console.log(
+  fearNotLetter("bcdf")
+);
+
+function uniteUnique(arr) {
+  let args=[...arguments];
+  var resArr=[];
+  for (let i=0; i<args.length;i++){
+    for (let j=0;j<args[i].length;j++){
+      resArr.push(args[i][j]);
+    }
+  }
+  let temp_arr=[]
+  resArr.map(value=>{
+    if(!(arr.includes(value))){
+      temp_arr.push(value);
+    }
+  });
+  return [...arr,...temp_arr];
+}
+
+console.log(
+  uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]),
+  uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8])
+);
+
+
+const a1=x=>y=>z=>x+y+z;
+console.log(
+  a1(10)(20)(30)
+)
+
+function sumFibs(num) {
+  let a=1,b=1;
+  let result=[b];
+  if(num===1){
+    return a;
+  }
+  else{
+    for(let i=1;i<num;i++){
+        result.push(b+a);
+        a=b;
+        b=result[i];
+        
+    }
+  }
+  return result.reduce((sum,value)=>{
+    if((value<=num) && (value%2==1)){
+      return sum+=value;
+    }
+    return sum+=0;
+  })+1;
+}
+console.log(
+  sumFibs(75024)
+)
+
+function sumPrimes(num) {
+  let arr=[];
+  for(let i=1;i<=num;i++){
+    let flag=0;
+    for(let j=2;j<i;j++){
+      if(i%j==0){
+        flag=1;
+        break;
+      }
+    }
+    if(flag==0 && i>1){
+      arr.push(i);
+    } 
+  }
+  return arr.reduce((sum, value)=>sum+value)
+}
+console.log(
+  sumPrimes(977)
+);
+function dropElements(arr, func) {
+  for(let i=0;i<arr.length;i++){
+    if(func(arr[0])){
+      break;
+    } else {
+      arr.shift();
+    }
+  }
+  return arr;
+}
+
+console.log(
+  dropElements([1, 2, 3], function(n) {return n < 3; }),
+  dropElements([0, 1, 0, 1], function(n) {return n === 1;}),
+  dropElements([1, 2, 3, 4], function(n) {return n >= 3;}),
+  dropElements([1, 2, 3, 9, 2], function(n) {return n > 2;}),
+  dropElements([1, 2, 3, 4], function(n) {return n > 5;})
+);
+
+
+function binaryAgent(str) {
+  let arr=str.split(" ");
+  let newArr=arr.map(value=>{
+    let temp=[];
+    for(let i=0;i<value.length;i++){
+      temp.push((Number(value[i])*Math.pow(2,value.length-i-1)));
+    }
+    return temp;
+  });
+  return newArr.map(value=>{
+    let sum=0;
+    for(let i=0;i<value.length;i++){
+      sum+=value[i];
+    }
+    return String.fromCharCode(sum);
+  }).join('');
+}
+
+console.log(
+  binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111")
+);
+
+function addTogether() {
+  var args = Array.from(arguments);
+  return args.some(n => typeof n !== "number")
+    ? undefined
+    : args.length > 1
+    ? args.reduce((acc, n) => (acc += n), 0)
+    : n => (typeof n === "number" ? n + args[0] : undefined);
+}
+
+addTogether(2,3);
+
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  return arr.map(value=>{
+    let temp=0;
+    temp=Math.round(2*Math.PI*Math.sqrt((Math.pow(value.avgAlt+earthRadius,3))/GM));
+    delete value.avgAlt;
+    value["orbitalPeriod"]=temp;
+    return value;
+  });
+}
+
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
+
+function sym(args) {
+  let temp=[];
+  let arg=Object.values(arguments);
+  for(let i=0; i<arg.length;i++){
+    // arg[i].map(value=>{
+    //   temp.push(value);
+    // });
+    temp=[...temp,...arg[i]];
+  }
+  let commonArr=temp.filter((value, index, self) => self.indexOf(value) !== index);
+  return temp.filter(value=>!(commonArr.includes(value))).sort((a,b)=>a-b);
+}
+console.log(
+  sym([1, 2, 3], [5, 2, 1, 4])
+)
+
+function palindrome(str) {
+  return true;
+}
+
+
+console.log(
+  palindrome("eye")
+);
