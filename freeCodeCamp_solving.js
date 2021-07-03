@@ -163,10 +163,9 @@ function repeatStringNumTimes(str, num) {
 console.log(repeatStringNumTimes("abc", 3));
 
 function truncateString(str, num) {
-  if(num<str.length){
-    return str.split("").filter((element,index) => index < num).join("")+"...";
-  }
-  else{
+  if (num < str.length) {
+    return str.split("").filter((element, index) => index < num).join("") + "...";
+  } else {
     return str;
   }
 }
@@ -176,12 +175,14 @@ console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tis
 
 function findElement(arr, func) {
   let num = 0;
-  num=arr.filter(element=>func(element));
+  num = arr.filter(element => func(element));
   return num[0];
 }
 
 console.log(findElement([1, 2, 3, 4], num => num % 2 === 0));
-console.log(findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; }));
+console.log(findElement([1, 3, 5, 8, 9, 10], function (num) {
+  return num % 2 === 0;
+}));
 
 function frankenSplice(arr1, arr2, n) {
   let localArr = arr2.slice();
@@ -202,17 +203,17 @@ console.log(bouncer([7, "ate", "", false, 9]));
 var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
 
 // Change code below this line
-function add (bookList,bookName) {
-  let newBookList=[...bookList];
+function add(bookList, bookName) {
+  let newBookList = [...bookList];
   newBookList.push(bookName);
   return newBookList;
-  
+
   // Change code above this line
 }
 
 // Change code below this line
-function remove (bookList,bookName) {
-  var temp_list=[...bookList];
+function remove(bookList, bookName) {
+  var temp_list = [...bookList];
   var book_index = temp_list.indexOf(bookName);
   if (book_index >= 0) {
 
@@ -220,7 +221,7 @@ function remove (bookList,bookName) {
     return temp_list;
 
     // Change code above this line
-    }
+  }
 }
 
 var newBookList = add(bookList, 'A Brief History of Time');
@@ -234,8 +235,7 @@ newestBookList
 
 
 // The global variable
-var watchList = [
-  {
+var watchList = [{
     "Title": "Inception",
     "Year": "2010",
     "Rated": "PG-13",
@@ -350,8 +350,11 @@ var watchList = [
 // Only change code below this line
 
 var ratings = [];
-ratings=watchList.map(movie=>{
-  return {title:movie.Title,rating:movie.imdbRating}
+ratings = watchList.map(movie => {
+  return {
+    title: movie.Title,
+    rating: movie.imdbRating
+  }
 });
 // watchList
 ratings
@@ -364,27 +367,31 @@ console.log(JSON.stringify(ratings));
 // The global variable
 var s1 = [23, 65, 98, 5];
 
-Array.prototype.myFilter = function(callback) {
+Array.prototype.myFilter = function (callback) {
   // Only change code below this line
   var newArray = []
-  this.forEach(element=>{if(callback(element)){newArray.push(element)}});
+  this.forEach(element => {
+    if (callback(element)) {
+      newArray.push(element)
+    }
+  });
   newArray
   // Only change code above this line
   return newArray;
 };
 
-var new_s = s1.myFilter(function(item) {
+var new_s = s1.myFilter(function (item) {
   return item % 2 === 1;
 });
 
-function getRating(watchList){
+function getRating(watchList) {
   // Only change code below this line
-  var averageRating=
-  watchList
-  .filter(movie=>movie.Director==="Christopher Nolan")
-  .map(film=> Number(film.imdbRating))
-  .reduce((sum,rating)=>sum+rating,0)/
-  watchList.filter(film => film.Director === "Christopher Nolan").length;
+  var averageRating =
+    watchList
+    .filter(movie => movie.Director === "Christopher Nolan")
+    .map(film => Number(film.imdbRating))
+    .reduce((sum, rating) => sum + rating, 0) /
+    watchList.filter(film => film.Director === "Christopher Nolan").length;
   // Only change code above this line
   return averageRating;
 }
@@ -392,7 +399,7 @@ console.log(getRating(watchList));
 
 function splitify(str) {
   // Only change code below this line
-  const s= str.split(/\W/);
+  const s = str.split(/\W/);
   s
   // Only change code above this line
 }
@@ -400,14 +407,14 @@ splitify("Hello World,I-am code");
 
 
 function urlSlug(title) {
-  let result= title.toLowerCase().split(" ").filter(value => value!=='').join('-');
+  let result = title.toLowerCase().split(" ").filter(value => value !== '').join('-');
   result
 }
 urlSlug(" Winter Is  Coming")
 
 function destroyer(arr) {
-  let args=[...arguments].slice(1);
-  return arr.filter(item=>!(args.includes(item))); 
+  let args = [...arguments].slice(1);
+  return arr.filter(item => !(args.includes(item)));
 }
 
 console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
@@ -417,24 +424,35 @@ console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
 function whatIsInAName(collection, source) {
   // Only change code below this line
   let keys = Object.keys(source);
-  return collection.filter((obj) =>{
-      return keys.every((key) =>{
-        return obj.hasOwnProperty(key) && obj[key] === source[key];
-      });
+  return collection.filter((obj) => {
+    return keys.every((key) => {
+      return obj.hasOwnProperty(key) && obj[key] === source[key];
     });
+  });
   // Only change code above this line
 }
 
-whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+whatIsInAName([{
+  first: "Romeo",
+  last: "Montague"
+}, {
+  first: "Mercutio",
+  last: null
+}, {
+  first: "Tybalt",
+  last: "Capulet"
+}], {
+  last: "Capulet"
+});
 
 
 function translatePigLatin(str) {
-  arr=str.split("");
-  var s=null;
-  if(['a','e','i','o','u'].includes(arr[0])){
-    s=str+"way";
+  arr = str.split("");
+  var s = null;
+  if (['a', 'e', 'i', 'o', 'u'].includes(arr[0])) {
+    s = str + "way";
   } else {
-    s=arr.slice(1,arr.length).concat(arr[0]).concat(['a','y']).join("");
+    s = arr.slice(1, arr.length).concat(arr[0]).concat(['a', 'y']).join("");
   }
   s
   return s;
@@ -444,13 +462,13 @@ console.log(translatePigLatin("california"));
 console.log(translatePigLatin("algorithm"));
 
 function myReplace(str, before, after) {
-  if(before.match(/[A-Z]/)){
-    after=after.charAt(0).toUpperCase() + after.slice(1);
+  if (before.match(/[A-Z]/)) {
+    after = after.charAt(0).toUpperCase() + after.slice(1);
     after
   } else {
-    after=after.charAt(0).toLowerCase() + after.slice(1);
+    after = after.charAt(0).toLowerCase() + after.slice(1);
   }
-  return str.replace(before,after);
+  return str.replace(before, after);
 }
 
 console.log(
@@ -459,17 +477,17 @@ console.log(
 );
 
 function pairElement(str) {
-  let stringArr=str.split("");
-  var newArray=[];
-  stringArr.map(value=>{
-    if(value==='A'){
-      newArray.push(["A","T"]);
-    } else if(value==='T'){
-      newArray.push(["T","A"]);
-    } else if(value==='C'){
-      newArray.push(["C","G"]);
-    } else{
-      newArray.push(["G","C"]);
+  let stringArr = str.split("");
+  var newArray = [];
+  stringArr.map(value => {
+    if (value === 'A') {
+      newArray.push(["A", "T"]);
+    } else if (value === 'T') {
+      newArray.push(["T", "A"]);
+    } else if (value === 'C') {
+      newArray.push(["C", "G"]);
+    } else {
+      newArray.push(["G", "C"]);
     }
   });
   newArray
@@ -479,9 +497,9 @@ function pairElement(str) {
 pairElement("ATCGA");
 
 function fearNotLetter(str) {
-  for(var i=0; i<str.length;i++){
-    var code=str.charCodeAt(i);
-    if(code!==str.charCodeAt(0)+i){
+  for (var i = 0; i < str.length; i++) {
+    var code = str.charCodeAt(i);
+    if (code !== str.charCodeAt(0) + i) {
       return String.fromCharCode(code - 1);
     }
   }
@@ -492,20 +510,20 @@ console.log(
 );
 
 function uniteUnique(arr) {
-  let args=[...arguments];
-  var resArr=[];
-  for (let i=0; i<args.length;i++){
-    for (let j=0;j<args[i].length;j++){
+  let args = [...arguments];
+  var resArr = [];
+  for (let i = 0; i < args.length; i++) {
+    for (let j = 0; j < args[i].length; j++) {
       resArr.push(args[i][j]);
     }
   }
-  let temp_arr=[]
-  resArr.map(value=>{
-    if(!(arr.includes(value))){
+  let temp_arr = []
+  resArr.map(value => {
+    if (!(arr.includes(value))) {
       temp_arr.push(value);
     }
   });
-  return [...arr,...temp_arr];
+  return [...arr, ...temp_arr];
 }
 
 console.log(
@@ -514,58 +532,59 @@ console.log(
 );
 
 
-const a1=x=>y=>z=>x+y+z;
+const a1 = x => y => z => x + y + z;
 console.log(
   a1(10)(20)(30)
 )
 
 function sumFibs(num) {
-  let a=1,b=1;
-  let result=[b];
-  if(num===1){
+  let a = 1,
+    b = 1;
+  let result = [b];
+  if (num === 1) {
     return a;
-  }
-  else{
-    for(let i=1;i<num;i++){
-        result.push(b+a);
-        a=b;
-        b=result[i];
-        
+  } else {
+    for (let i = 1; i < num; i++) {
+      result.push(b + a);
+      a = b;
+      b = result[i];
+
     }
   }
-  return result.reduce((sum,value)=>{
-    if((value<=num) && (value%2==1)){
-      return sum+=value;
+  return result.reduce((sum, value) => {
+    if ((value <= num) && (value % 2 == 1)) {
+      return sum += value;
     }
-    return sum+=0;
-  })+1;
+    return sum += 0;
+  }) + 1;
 }
 console.log(
   sumFibs(75024)
 )
 
 function sumPrimes(num) {
-  let arr=[];
-  for(let i=1;i<=num;i++){
-    let flag=0;
-    for(let j=2;j<i;j++){
-      if(i%j==0){
-        flag=1;
+  let arr = [];
+  for (let i = 1; i <= num; i++) {
+    let flag = 0;
+    for (let j = 2; j < i; j++) {
+      if (i % j == 0) {
+        flag = 1;
         break;
       }
     }
-    if(flag==0 && i>1){
+    if (flag == 0 && i > 1) {
       arr.push(i);
-    } 
+    }
   }
-  return arr.reduce((sum, value)=>sum+value)
+  return arr.reduce((sum, value) => sum + value)
 }
 console.log(
   sumPrimes(977)
 );
+
 function dropElements(arr, func) {
-  for(let i=0;i<arr.length;i++){
-    if(func(arr[0])){
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[0])) {
       break;
     } else {
       arr.shift();
@@ -575,27 +594,37 @@ function dropElements(arr, func) {
 }
 
 console.log(
-  dropElements([1, 2, 3], function(n) {return n < 3; }),
-  dropElements([0, 1, 0, 1], function(n) {return n === 1;}),
-  dropElements([1, 2, 3, 4], function(n) {return n >= 3;}),
-  dropElements([1, 2, 3, 9, 2], function(n) {return n > 2;}),
-  dropElements([1, 2, 3, 4], function(n) {return n > 5;})
+  dropElements([1, 2, 3], function (n) {
+    return n < 3;
+  }),
+  dropElements([0, 1, 0, 1], function (n) {
+    return n === 1;
+  }),
+  dropElements([1, 2, 3, 4], function (n) {
+    return n >= 3;
+  }),
+  dropElements([1, 2, 3, 9, 2], function (n) {
+    return n > 2;
+  }),
+  dropElements([1, 2, 3, 4], function (n) {
+    return n > 5;
+  })
 );
 
 
 function binaryAgent(str) {
-  let arr=str.split(" ");
-  let newArr=arr.map(value=>{
-    let temp=[];
-    for(let i=0;i<value.length;i++){
-      temp.push((Number(value[i])*Math.pow(2,value.length-i-1)));
+  let arr = str.split(" ");
+  let newArr = arr.map(value => {
+    let temp = [];
+    for (let i = 0; i < value.length; i++) {
+      temp.push((Number(value[i]) * Math.pow(2, value.length - i - 1)));
     }
     return temp;
   });
-  return newArr.map(value=>{
-    let sum=0;
-    for(let i=0;i<value.length;i++){
-      sum+=value[i];
+  return newArr.map(value => {
+    let sum = 0;
+    for (let i = 0; i < value.length; i++) {
+      sum += value[i];
     }
     return String.fromCharCode(sum);
   }).join('');
@@ -607,51 +636,207 @@ console.log(
 
 function addTogether() {
   var args = Array.from(arguments);
-  return args.some(n => typeof n !== "number")
-    ? undefined
-    : args.length > 1
-    ? args.reduce((acc, n) => (acc += n), 0)
-    : n => (typeof n === "number" ? n + args[0] : undefined);
+  return args.some(n => typeof n !== "number") ?
+    undefined :
+    args.length > 1 ?
+    args.reduce((acc, n) => (acc += n), 0) :
+    n => (typeof n === "number" ? n + args[0] : undefined);
 }
 
-addTogether(2,3);
+addTogether(2, 3);
 
 function orbitalPeriod(arr) {
   var GM = 398600.4418;
   var earthRadius = 6367.4447;
-  return arr.map(value=>{
-    let temp=0;
-    temp=Math.round(2*Math.PI*Math.sqrt((Math.pow(value.avgAlt+earthRadius,3))/GM));
+  return arr.map(value => {
+    let temp = 0;
+    temp = Math.round(2 * Math.PI * Math.sqrt((Math.pow(value.avgAlt + earthRadius, 3)) / GM));
     delete value.avgAlt;
-    value["orbitalPeriod"]=temp;
+    value["orbitalPeriod"] = temp;
     return value;
   });
 }
 
-orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
-orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
+orbitalPeriod([{
+  name: "sputnik",
+  avgAlt: 35873.5553
+}]);
+orbitalPeriod([{
+  name: "iss",
+  avgAlt: 413.6
+}, {
+  name: "hubble",
+  avgAlt: 556.7
+}, {
+  name: "moon",
+  avgAlt: 378632.553
+}]);
 
 function sym(args) {
-  let temp=[];
-  let arg=Object.values(arguments);
-  for(let i=0; i<arg.length;i++){
+  let temp = [];
+  let arg = Object.values(arguments);
+  for (let i = 0; i < arg.length; i++) {
     // arg[i].map(value=>{
     //   temp.push(value);
     // });
-    temp=[...temp,...arg[i]];
+    temp = [...temp, ...arg[i]];
   }
-  let commonArr=temp.filter((value, index, self) => self.indexOf(value) !== index);
-  return temp.filter(value=>!(commonArr.includes(value))).sort((a,b)=>a-b);
+  let commonArr = temp.filter((value, index, self) => self.indexOf(value) !== index);
+  return temp.filter(value => !(commonArr.includes(value))).sort((a, b) => a - b);
 }
 console.log(
   sym([1, 2, 3], [5, 2, 1, 4])
 )
 
 function palindrome(str) {
-  return true;
+  let arr = str.toLowerCase().split("").filter(value => value.match(/[a-z0-9+]/g));
+  arr
+  let revArr = str.toLowerCase().split("").filter(value => value.match(/[a-z0-9+]/g)).reverse();
+  revArr
+  let flag = [];
+  for (let i = 0; i < arr.length / 2; i++) {
+    if (arr[i] === revArr[i]) {
+      flag.push(true);
+    } else {
+      flag.push(false);
+    }
+  }
+  flag
+  return flag.every(value => value == true);
 }
 
 
 console.log(
-  palindrome("eye")
+  palindrome("")
 );
+
+
+function romanize(num) {
+  var lookup = {
+      M: 1000,
+      CM: 900,
+      D: 500,
+      CD: 400,
+      C: 100,
+      XC: 90,
+      L: 50,
+      XL: 40,
+      X: 10,
+      IX: 9,
+      V: 5,
+      IV: 4,
+      I: 1
+    },
+    roman = '',
+    i;
+  for (i in lookup) {
+    while (num >= lookup[i]) {
+      roman += i;
+      num -= lookup[i];
+    }
+  }
+  return roman;
+}
+console.log(
+  romanize(152)
+)
+
+function rot13(str) {
+  let arr= str.split("");
+  let reg=/[A-Z]+/g;
+  return arr
+  .map(value=>{
+    if(value.match(reg)){
+      if(value.match(/[A-M]/)){
+        return String.fromCharCode(value.charCodeAt()+13);
+      }
+      else{
+        return String.fromCharCode(value.charCodeAt()-13);
+      }
+    } else { 
+      return value;
+    }
+  })
+  .join("");
+}
+
+console.log(
+  rot13("GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT.")
+);
+
+function checkCashRegister(price, cash, cid) {
+  var change = cash - price; 
+  let totalCash = 0; 
+  let cidReverse = [...cid].reverse(); 
+  let temp = []; 
+  let cashValue = {  
+    "PENNY": 0.01, 
+    "NICKEL": 0.05, 
+    "DIME": 0.1, 
+    "QUARTER": 0.25, 
+    "ONE": 1, 
+    "FIVE": 5, 
+    "TEN": 10, 
+    "TWENTY": 20, 
+    "ONE HUNDRED": 100
+    }
+    
+  let changeDue = {  
+    status: '',
+    change: []
+  }
+  
+  cid.forEach(element => {  
+    totalCash += element[1];
+  });
+  totalCash = parseFloat(totalCash.toFixed(2)) 
+
+  
+  function cashUnit(unit, index) { 
+    let unitTotal = cidReverse[index][1]; 
+    let amount = Math.floor(change / cashValue[unit]) * cashValue[unit]; 
+    if (unitTotal > 0) { 
+      if (unitTotal >= amount) { 
+        change -= amount; 
+        change = parseFloat(change.toFixed(2));
+        return amount;
+      }
+      else {  
+        change -= unitTotal; 
+        change = parseFloat(change.toFixed(2));
+        return unitTotal; 
+      }
+    }
+    else { 
+      return 0;
+    }
+  }
+
+  
+  
+  function getChange() {
+    let changeOwed = cash - price; 
+    for (let [index, value] of cidReverse.entries())  {
+      let changeGotten = cashUnit(value[0], index);
+      if (changeGotten > 0) { 
+        temp.push([value[0], changeGotten]);
+      }
+      if (change === 0) {break;} 
+    }
+    if (totalCash < changeOwed || change !== 0) {
+        changeDue.status = "INSUFFICIENT_FUNDS";
+    }
+    else if (totalCash == changeOwed) {
+        changeDue.status = "CLOSED";
+        changeDue.change = [...cid];
+    }
+    else {
+      changeDue.status = "OPEN";
+      changeDue.change = [...temp];
+    }
+  }
+  
+  getChange(); 
+  return changeDue;
+}
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
