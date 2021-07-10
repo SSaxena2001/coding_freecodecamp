@@ -742,22 +742,21 @@ console.log(
 )
 
 function rot13(str) {
-  let arr= str.split("");
-  let reg=/[A-Z]+/g;
+  let arr = str.split("");
+  let reg = /[A-Z]+/g;
   return arr
-  .map(value=>{
-    if(value.match(reg)){
-      if(value.match(/[A-M]/)){
-        return String.fromCharCode(value.charCodeAt()+13);
+    .map(value => {
+      if (value.match(reg)) {
+        if (value.match(/[A-M]/)) {
+          return String.fromCharCode(value.charCodeAt() + 13);
+        } else {
+          return String.fromCharCode(value.charCodeAt() - 13);
+        }
+      } else {
+        return value;
       }
-      else{
-        return String.fromCharCode(value.charCodeAt()-13);
-      }
-    } else { 
-      return value;
-    }
-  })
-  .join("");
+    })
+    .join("");
 }
 
 console.log(
@@ -765,78 +764,210 @@ console.log(
 );
 
 function checkCashRegister(price, cash, cid) {
-  var change = cash - price; 
-  let totalCash = 0; 
-  let cidReverse = [...cid].reverse(); 
-  let temp = []; 
-  let cashValue = {  
-    "PENNY": 0.01, 
-    "NICKEL": 0.05, 
-    "DIME": 0.1, 
-    "QUARTER": 0.25, 
-    "ONE": 1, 
-    "FIVE": 5, 
-    "TEN": 10, 
-    "TWENTY": 20, 
+  var change = cash - price;
+  let totalCash = 0;
+  let cidReverse = [...cid].reverse();
+  let temp = [];
+  let cashValue = {
+    "PENNY": 0.01,
+    "NICKEL": 0.05,
+    "DIME": 0.1,
+    "QUARTER": 0.25,
+    "ONE": 1,
+    "FIVE": 5,
+    "TEN": 10,
+    "TWENTY": 20,
     "ONE HUNDRED": 100
-    }
-    
-  let changeDue = {  
+  }
+
+  let changeDue = {
     status: '',
     change: []
   }
-  
-  cid.forEach(element => {  
+
+  cid.forEach(element => {
     totalCash += element[1];
   });
-  totalCash = parseFloat(totalCash.toFixed(2)) 
+  totalCash = parseFloat(totalCash.toFixed(2))
 
-  
-  function cashUnit(unit, index) { 
-    let unitTotal = cidReverse[index][1]; 
-    let amount = Math.floor(change / cashValue[unit]) * cashValue[unit]; 
-    if (unitTotal > 0) { 
-      if (unitTotal >= amount) { 
-        change -= amount; 
+
+  function cashUnit(unit, index) {
+    let unitTotal = cidReverse[index][1];
+    let amount = Math.floor(change / cashValue[unit]) * cashValue[unit];
+    if (unitTotal > 0) {
+      if (unitTotal >= amount) {
+        change -= amount;
         change = parseFloat(change.toFixed(2));
         return amount;
-      }
-      else {  
-        change -= unitTotal; 
+      } else {
+        change -= unitTotal;
         change = parseFloat(change.toFixed(2));
-        return unitTotal; 
+        return unitTotal;
       }
-    }
-    else { 
+    } else {
       return 0;
     }
   }
 
-  
-  
+
+
   function getChange() {
-    let changeOwed = cash - price; 
-    for (let [index, value] of cidReverse.entries())  {
+    let changeOwed = cash - price;
+    for (let [index, value] of cidReverse.entries()) {
       let changeGotten = cashUnit(value[0], index);
-      if (changeGotten > 0) { 
+      if (changeGotten > 0) {
         temp.push([value[0], changeGotten]);
       }
-      if (change === 0) {break;} 
+      if (change === 0) {
+        break;
+      }
     }
     if (totalCash < changeOwed || change !== 0) {
-        changeDue.status = "INSUFFICIENT_FUNDS";
-    }
-    else if (totalCash == changeOwed) {
-        changeDue.status = "CLOSED";
-        changeDue.change = [...cid];
-    }
-    else {
+      changeDue.status = "INSUFFICIENT_FUNDS";
+    } else if (totalCash == changeOwed) {
+      changeDue.status = "CLOSED";
+      changeDue.change = [...cid];
+    } else {
       changeDue.status = "OPEN";
       changeDue.change = [...temp];
     }
   }
-  
-  getChange(); 
+
+  getChange();
   return changeDue;
 }
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(19.5, 20, [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]);
+
+function updateInventory(arr1, arr2) {
+  let common_values = []
+  
+}
+
+// Example inventory lists
+var curInv = [
+  [21, "Bowling Ball"],
+  [2, "Dirty Sock"],
+  [1, "Hair Pin"],
+  [5, "Microphone"]
+];
+
+var newInv = [
+  [2, "Hair Pin"],
+  [3, "Half-Eaten Apple"],
+  [67, "Bowling Ball"],
+  [7, "Toothpaste"]
+];
+
+updateInventory(curInv, newInv);
+
+function countingValleys(steps, path) {
+  // Write your code here
+  let arr=path.split('');
+  let temp=[];
+  let sum=0,count=0;
+  arr.map(value=>{
+    if(value==='D'){
+      sum+=-1;
+    } 
+    if(value==='U') {
+      sum+=1;
+    }
+    temp.push(sum);
+  });
+  for(let i=0; i<steps; i++) {
+    if(temp[i]===0){
+      if(temp[i-1]<0){
+        count+=1;
+      }
+    }
+  }
+  return count;
+}
+console.log(
+  countingValleys(8,"DDUUUUDD")
+)
+
+function getMoneySpent(keyboards, drives, b) {
+  /*
+   * Write your code here.
+   */
+  let temp_arr=[]
+  for (let i=0;i<keyboards.length; i++){
+    for(let j=0;j<drives.length;j++){
+      temp_arr.push(keyboards[i]+drives[j]);
+    }
+  }
+  temp_arr=temp_arr.filter(value => value<=b).sort((a,b) => b - a);
+  if(temp_arr.length===0){
+    return -1;
+  }
+  return temp_arr[0];
+}
+
+console.log(
+getMoneySpent([4],[5],5)
+)
+
+function catAndMouse(x, y, z) {
+  diff_A= z>x ? z-x : x-z;
+  diff_B= z>y ? z-y : y-z;
+  if(diff_A===diff_B){
+    return "Mouse C";
+  } else if(diff_A>diff_B){
+    return "Cat B";
+  } else {
+    return "Cat A";
+  }
+
+}
+console.log(
+  catAndMouse(1,3,2)
+)
+
+function formingMagicSquare(s) {
+  // Write your code here
+  const squares = ['618753294', '816357492', '834159672', '438951276', '672159834', '276951438', '294753618', '492357816'];
+  let min = 100;
+  let cost = (s, squares) => {
+
+      return [...s.map(value => value.join('')).join('')].reduce((target, item, index) => {
+          target += Math.abs(+item - +squares[index])
+
+          return target;
+      }, 0)
+  };
+
+  squares.forEach((item, index) => {
+      let value = cost(s, squares[index]);
+
+      (value < min) && (min = value);
+  });
+
+  return min;
+}
+console.log(
+  formingMagicSquare([[5, 3, 4], [1, 5, 8], [6, 4, 2]])
+)
+
+function pickingNumbers(a) {
+  // Write your code here
+  a=a.sort((a,b)=>a-b);
+  temp_arr=[];
+  for(let i=0; i<a.length-1; i++){
+    if(a[i+1]-a[i]<=1){
+
+    }
+  }
+}
+
+pickingNumbers([1,1,2,2,4,4,5,5,5]);
