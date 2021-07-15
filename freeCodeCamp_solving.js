@@ -959,15 +959,11 @@ console.log(
   formingMagicSquare([[5, 3, 4], [1, 5, 8], [6, 4, 2]])
 )
 
-function pickingNumbers(a) {
-  // Write your code here
-  a=a.sort((a,b)=>a-b);
-  temp_arr=[];
-  for(let i=0; i<a.length-1; i++){
-    if(a[i+1]-a[i]<=1){
-
-    }
-  }
+function makeString(s){
+  return s.split(" ").map(val=>val.split("")[0]).join("")
 }
 
-pickingNumbers([1,1,2,2,4,4,5,5,5]);
+console.log(
+  makeString("sees eyes xray yoat")
+)
+
